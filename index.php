@@ -43,7 +43,7 @@
 	}
 	
 	hr {
-		border:2px solid rgba(210, 210, 210, 1.0);
+		border:1px solid rgba(210, 210, 210, 1.0);
 		width:100.8%;
 		margin-left:-2px;
 		padding:0px;
@@ -77,6 +77,26 @@
 		color:#FFF;
 	}
 	
+	.results {
+		border:1px solid #000;
+		margin-left:200px;
+		padding:5px;
+		background:white;
+		margin-top:5px;
+		width:230px;
+		
+	}
+	
+	.results:active {
+		width:400px;
+	}
+	
+	
+	
+	.listers {
+		list-style-type:none;
+	}
+	
 	.btn-success {
 		background:rgb(28, 184, 65);
 	}
@@ -100,8 +120,31 @@
 			$('#show').load("testText.txt");
 		}, 10);
 	});
+	
+	function showHint(str) {
+    if (str.length == 0) {
+        document.getElementById("txthints").innerHTML = "";
+        return;
+    } else if(str.length > 0) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txthints").innerHTML = '<div class="results listers">' + xmlhttp.responseText + '</div>';
+            }
+        };
+        xmlhttp.open("GET", "pages/users.php?g=" + str, true);
+        xmlhttp.send();
+    }
+}
+
+	
+
 	</script>
-	<div class="menu"><input type="text" placeholder="Insert a nigger here." class="input_menu" /></div>
+	<div class="menu">
+	<input type="text" placeholder="Insert a nigger here." class="input_menu"  onkeyup="showHint(this.value)" />
+	<div id="txthints"></div>
+	</div>
+	</div>
 	<div class="container"> Slide down test. </div> <div class="updateContainer"> Update field.<hr>This field will automatically update the content.<br><br><hr>
 	
 	<button class="btn btn-success">.btn btn-success</button>
