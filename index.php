@@ -10,6 +10,7 @@
 		font-family:"Open Sans", sans-serif;
 		font-size:12px;
 		margin:0px;
+		background:rgba(190, 190, 190, 1.0);
 	}
 	.container {
 		border:1px solid #000;
@@ -22,17 +23,17 @@
 		margin-top:45px;
 		margin-left:200px;
 		margin-right:-180px;
+		background:#FFF;
 	}
 	
 	.container:hover {
-		
 		height:200px;
 	}
 	
 	.updateContainer {
 		border:1px solid #000;
 		padding:2px;
-		width:520px;
+		width:500px;
 		height:320px;
 		transition:height 1.5s;
 		float:left;
@@ -40,6 +41,7 @@
 		overflow:auto;
 		margin-top:45px;
 		margin-left:200px;
+		background:#FFF;
 	}
 	
 	hr {
@@ -64,10 +66,10 @@
 		padding:2px;
 		margin-top:5px;
 		border:0px;
-		width:230px;
+		width:30%;
 		border-radius:5px;
 		background:rgba(210, 210, 210, 1.0);
-		margin-left:200px;
+		margin-left:14.5%;
 	}
 	
 	.btn {
@@ -79,12 +81,12 @@
 	
 	.results {
 		border:1px solid #000;
-		margin-left:200px;
+		margin-left:14.5%;
 		padding:5px;
 		background:white;
 		margin-top:5px;
 		width:230px;
-		
+		border-radius:5px;
 	}
 	
 	.results:active {
@@ -107,6 +109,12 @@
 	
 	.btn-danger {
 		background: rgb(202, 60, 60);
+	}
+	
+	.link {
+		color:#FFF;
+		text-decoration:none;
+		cursor:default;
 	}
 	
 	.btn-info {
@@ -141,17 +149,22 @@
 
 	</script>
 	<div class="menu">
-	<input type="text" placeholder="Insert a nigger here." class="input_menu"  onkeyup="showHint(this.value)" />
+	<input type="text" placeholder="Search for a user, /groups" class="input_menu"  onkeyup="showHint(this.value)" />
 	<div id="txthints"></div>
 	</div>
 	</div>
-	<div class="container"> Slide down test. </div> <div class="updateContainer"> Update field.<hr>This field will automatically update the content.<br><br><hr>
+	<div class="container"> Slide down test. </div> <div class="updateContainer">
+	<?php
+	if($_GET["page"]) {
+		include("pages/".$_GET["page"].".php");
+	}
+	if(!file_exists("pages/".$_GET["page"].".php")) {
+		if(file_exists("pages/home.php")) {
+			header("Location: ?page=home");
+		}
+	}
+	?>
 	
-	<button class="btn btn-success">.btn btn-success</button>
-	<button class="btn btn-warning">.btn btn-warning</button>
-	<button class="btn btn-danger">.btn btn-danger</button>
-	<button class="btn btn-info">.btn btn-info</button>
-	
-	<div id="show"> </div></div>
+	</div>
 </body>
 </html>	
