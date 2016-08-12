@@ -1,3 +1,18 @@
+<?php
+session_start();
+ob_start();
+
+
+
+$server = "localhost";
+$database = "botter";
+$password = "";
+$username = "root";
+
+$conn = mysqli_connect($server, $username, $password, $database) or die("Error.. couldn't connect to the server.");
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,11 +45,27 @@
 		height:200px;
 	}
 	
+	.containerRight {
+	border:1px solid rgba(110, 110, 110, 1.0);
+		padding:2px;
+		width:150px;
+		height:130px;
+		transition:height 1.5s;
+		float:right;
+		margin:2px;
+		margin-top:45px;
+		margin-right:140px;
+		background:#FFF;
+		border-radius:5px;
+		box-shadow:0px 2px 2px rgba(40, 40, 40, 0.3);
+	}
+	
 	.updateContainer {
 		border:1px solid #000;
 		padding:2px;
-		width:500px;
-		height:320px;
+		padding-left:10px;
+		width:680px;
+		height:460px;
 		transition:height 1.5s;
 		float:left;
 		margin:2px;
@@ -42,12 +73,13 @@
 		margin-top:45px;
 		margin-left:200px;
 		background:#FFF;
+		border-radius:4px;
 	}
 	
 	hr {
 		border:1px solid rgba(210, 210, 210, 1.0);
-		width:100.8%;
-		margin-left:-2px;
+		width:102%;
+		margin-left:-10px;
 		padding:0px;
 	}
 	
@@ -89,14 +121,9 @@
 		border-radius:5px;
 	}
 	
-	.results:active {
-		width:400px;
-	}
-	
-	
-	
 	.listers {
 		list-style-type:none;
+		padding:5px;
 	}
 	
 	.btn-success {
@@ -149,7 +176,8 @@
 
 	</script>
 	<div class="menu">
-	<input type="text" placeholder="Search for a user, /groups" class="input_menu"  onkeyup="showHint(this.value)" />
+	<input type="text" placeholder="Search for a user, /groups" class="input_menu"  onkeyup="showHint(this.value)" /> <?php if(isset($_SESSION['user'])) { echo "<a class='link' href='?page=users&u=".$_SESSION["user"]."'>".$_SESSION["user"]."</a> <a class='link' href='?page=logout'>Logout</a>"; } else { echo '<a href="?page=reglog" class="btn btn-info link_menu link">Login/Register</a>'; } ?>
+
 	<div id="txthints"></div>
 	</div>
 	</div>
@@ -163,8 +191,9 @@
 			header("Location: ?page=home");
 		}
 	}
+	
 	?>
 	
-	</div>
+	</div> <div class="containerRight"> The test Box.<br><?php if(isset($_SESSION['user'])) { include('pages/testbox.php'); } else { echo 'Login to continue.'; } ?></div>
 </body>
 </html>	
