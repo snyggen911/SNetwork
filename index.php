@@ -28,17 +28,17 @@ $conn = mysqli_connect($server, $username, $password, $database) or die("Error..
 		background:rgba(190, 190, 190, 1.0);
 	}
 	.container {
-		border:1px solid #000;
+		border:1px solid rgba(110, 110, 110, 1.0);
 		padding:2px;
 		width:120px;
 		height:20px;
 		transition:height 1.5s;
-		float:left;
+		float:right;
 		margin:2px;
 		margin-top:45px;
-		margin-left:200px;
-		margin-right:-180px;
+		box-shadow:0px 2px 2px rgba(40, 40, 40, 0.3);
 		background:#FFF;
+		border-radius:5px;
 	}
 	
 	.container:hover {
@@ -48,39 +48,44 @@ $conn = mysqli_connect($server, $username, $password, $database) or die("Error..
 	.containerRight {
 	border:1px solid rgba(110, 110, 110, 1.0);
 		padding:2px;
-		width:150px;
+		width:120px;
 		height:130px;
 		transition:height 1.5s;
 		float:right;
 		margin:2px;
-		margin-top:45px;
-		margin-right:140px;
 		background:#FFF;
 		border-radius:5px;
+		margin-top:45px;
 		box-shadow:0px 2px 2px rgba(40, 40, 40, 0.3);
 	}
 	
 	.updateContainer {
 		border:1px solid #000;
 		padding:2px;
-		padding-left:10px;
-		width:680px;
-		height:460px;
+		width:650px;
+		min-height:460px;
 		transition:height 1.5s;
 		float:left;
 		margin:2px;
-		overflow:auto;
+		
 		margin-top:45px;
-		margin-left:200px;
 		background:#FFF;
 		border-radius:4px;
 	}
 	
 	hr {
 		border:1px solid rgba(210, 210, 210, 1.0);
-		width:102%;
-		margin-left:-10px;
-		padding:0px;
+		width:100%;
+		margin-left:auto;
+		margin-right:auto;
+		
+	}
+	
+	.user_cover {
+		width:99.8%;
+		height:125px;
+		border:1px solid #000;
+		border-radius:5px;
 	}
 	
 	.menu {
@@ -92,6 +97,34 @@ $conn = mysqli_connect($server, $username, $password, $database) or die("Error..
 		border-bottom:1px solid #000;
 		background:rgba(36, 36, 36, 1.0);
 		
+	}
+	
+	.banner-size {
+		background-image:url('img/mystic.png');
+		background-size:cover;
+	}
+	
+	.banner-size:hover {
+		background:rgba(90, 90, 90, 1.0);
+		cursor:pointer;
+	}
+	
+	.rounded_photo {
+		width:80px;
+		height:80px;
+		border:2px solid #000;
+		border-radius: 50px;
+		margin-top:-70px;
+		margin-left:20px;
+		background:white;
+		background-image:url('img/user_viking.jpg');
+		background-size:cover;
+		
+	}
+	
+	.rounded_photo:hover {
+		background:rgba(90, 90, 90, 1.0);
+		cursor:pointer;
 	}
 	
 	.input_menu {
@@ -121,6 +154,17 @@ $conn = mysqli_connect($server, $username, $password, $database) or die("Error..
 		border-radius:5px;
 	}
 	
+	.topic {
+		width:97%;
+		min-height:40px;
+		border:1px solid #000;
+		padding:5px;
+		border:rgba(110, 110, 110, 1.0);
+		box-shadow:0px 2px 2px rgba(40, 40, 40, 0.3);
+		border-radius:5px;
+		background:rgba(230, 230, 230, 1.0);
+	}
+	
 	.listers {
 		list-style-type:none;
 		padding:5px;
@@ -147,6 +191,52 @@ $conn = mysqli_connect($server, $username, $password, $database) or die("Error..
 	.btn-info {
 		background: rgb(66, 184, 221);
 	}
+	
+	.wrapper {
+		width:800px;
+		margin-left:auto;
+		margin-right:auto;
+		border:0px solid #000;
+	}
+	
+	.attention {
+		 width:100%;
+		 height:60px;
+		 border:0px solid #000;
+		 color:#FFF;
+		 opacity:1;
+		 border-radius:5px;
+		 transition:opacity 0.6s;
+	}
+	
+	.danger_at {
+		background-color: #F44336;
+	}
+	.success_at {
+		background-color: #4CAF50;
+	}
+	.info_at {
+		background-color: #2196F3;
+	}
+	.warning_at {
+		background-color: #FF9800;
+	}
+	
+	.close_btn {
+		float:right;
+		color:#FFF;
+		font-size:18px;
+		cursor:default;
+		transition:0.3s;
+	}
+	
+	.close_btn:hover {
+		color:#000;
+	}
+	
+	li {
+		list-style-type:none;
+	}
 	</style>
 	<script type="text/javascript"> 
 	$(document).ready(
@@ -172,17 +262,13 @@ $conn = mysqli_connect($server, $username, $password, $database) or die("Error..
     }
 }
 
-	
-
 	</script>
-	<div class="menu">
-	<input type="text" placeholder="Search for a user, /groups" class="input_menu"  onkeyup="showHint(this.value)" /> <?php if(isset($_SESSION['user'])) { echo "<a class='link' href='?page=users&u=".$_SESSION["user"]."'>".$_SESSION["user"]."</a> <a class='link' href='?page=logout'>Logout</a>"; } else { echo '<a href="?page=reglog" class="btn btn-info link_menu link">Login/Register</a>'; } ?>
 
-	<div id="txthints"></div>
-	</div>
-	</div>
-	<div class="container"> Slide down test. </div> <div class="updateContainer">
-	<?php
+	
+<div class="wrapper">
+<div class="attention info_at"><span class="close_btn">&times;</span><br><b>&nbsp;Information!</b> Webpage is still under construction.<br>&nbsp;/ViKiNG.</div>
+<div class="updateContainer">
+<?php
 	if($_GET["page"]) {
 		include("pages/".$_GET["page"].".php");
 	}
@@ -193,7 +279,26 @@ $conn = mysqli_connect($server, $username, $password, $database) or die("Error..
 	}
 	
 	?>
-	
-	</div> <div class="containerRight"> The test Box.<br><?php if(isset($_SESSION['user'])) { include('pages/testbox.php'); } else { echo 'Login to continue.'; } ?></div>
+</div> <div class="containerRight">
+<li><a href="?page=home" class="listers">Home</a></li>
+<li><a href="?page=about" class="listers">About</a></li>
+<li><a href="?page=faq" class="listers">FAQ</a></li>
+<li><a href="?page=license" class="listers">License</a></li>
+<li><a href="?page=policy" class="listers">Policy</a></li>
+<hr>
+<li><a href="?page=users&u=ViKiNG" class="listers">Demo</a></li>
+</div> <div class="container"> </div></div>
+<script>
+var close = document.getElementsByClassName("close_btn");
+var i;
+
+for (i = 0; i < close.length; i++) {
+    close[i].onclick = function(){
+        var div = this.parentElement;
+        div.style.opacity = "0";
+        setTimeout(function(){ div.style.display = "none"; }, 600);
+    }
+}
+</script>
 </body>
 </html>	
